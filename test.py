@@ -1,4 +1,4 @@
-from mongodb.animal_shelter import AnimalShelter
+from animal_shelter import AnimalShelter
 import os
 
 dbo = AnimalShelter("aacuser", "password", "localhost", 52170, "AAC")
@@ -23,6 +23,8 @@ try:
     }
     result = dbo.create(new_doc)
     if result:
+        for doc in dbo.read({"animal_id": "SammyTest"}):
+            print(doc)
         print("document creation was successful")
 
     else:
