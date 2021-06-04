@@ -21,7 +21,7 @@ class AnimalShelter(object):
         """
         if data is not None:
             # insert the document to the database. insert() is deprecated, using insert_one()
-            result = self.database.animals.insert_one(data)  # data should be dictionary
+            result = self.collection.insert_one(data)  # data should be dictionary
             # retrieve the document that was just inserted
             result = self.collection.find_one(data)
 
