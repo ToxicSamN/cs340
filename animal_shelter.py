@@ -11,7 +11,19 @@ class AnimalShelter(object):
         # access the MongoDB databases and collections.
         self.client = MongoClient(f'mongodb://{username}:{password}@{host}:{port}/{database}')
         self.database = self.client[f'{database}']
-        self.collection = self.database["animals"]
+
+        # default collection is animals. Caller can change this with set_collection(str) method
+        self.collection = None
+        self.set_collection()
+
+    def set_collection(self, collection="animals"):
+        """
+             The set_collection method is a setter method for changing the database collection.
+             By default this is set to "animals".
+            :param collection:
+            :return:
+        """
+        self.collection = self.database[collection]
 
     def create(self, data=None) -> bool:
         """
@@ -46,20 +58,21 @@ class AnimalShelter(object):
 
         return self.collection.find(query_filter)
 
-    # TODO: Requires proper implementation. Not yet working
-    def update(self, update=None, update_filter=None) -> bool:
+    def update(self, update_filter=None, update=None, upsert=False) -> bool:
         """
-        The update method will accespt an update filter and an update set to send to the database
-        :param update:
-        :param update_filter:
-        :return:
+            The update method will accespt an update filter and an update set to send to the database
+            :param update_filter: a query that matches the document to update.
+            :param update: The modifications to apply to the document.
+            :param upsert: If True, perform an insert if no documents match the filter.
+            :return: bool True if modified count is 1.
         """
-        # FIXME: Broken, need to debug and figure it out
-        if update is not dict or update_filter is not dict:
-            raise Exception("unable to process update with invalid arguments")
 
-        result = self.collection.update_one(update_filter, update)
-        if result == 1:
+        if not isinstance(update, dict) or not isinstance(update_filter, dict):
+            raise Exception(f"invalid parameter type:\nupdate_filter: {type(update_filter)}\nupdate: {type(update)}\n"
+                            f"Expected dict, dict")
+
+        result = self.collection.update_one(filter=update_filter, update=update, upsert=upsert)
+        if result.modified_count == 1:
             return True
 
         return False

@@ -40,13 +40,17 @@ try:
 except NotImplementedError as e:
     print(f'suppressing READ exceptions right now\n{e}')
 
-# try:
-#    dbo.update({"animal_id": "SammyTest"},{})
-# except NotImplementedError as e:
-#    print(f'suppressing UPDATE exceptions right now\n{e}')
+try:
+   dbo.update({"animal_id": "SammyTest"}, {"$set": {"animal_id": "NewSammyTest"}})
+   for doc in dbo.read({"animal_id": "NewSammyTest"}):
+       print(doc)
+       print("document update success")
+
+except NotImplementedError as e:
+   print(f'suppressing UPDATE exceptions right now\n{e}')
 
 try:
-    if dbo.delete({"animal_id": "SammyTest"}):
+    if dbo.delete({"animal_id": "NewSammyTest"}):
         print("delete record success")
     else:
         print("delete record failed")

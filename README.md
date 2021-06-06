@@ -30,12 +30,13 @@ The read method will find a document in the database and return it to the caller
 
 ###AnimalShelter.update():
 The update method will accept an update filter and an update set to send to the database. This method uses the mongoDB update_one() method to update a single document at a time.
+`:param update_filter: a query that matches the document to update.`
 
-`:param update`:
+`:param update: The modifications to apply to the document.`
 
-`:param update_filter`:
+`:param upsert: If True, perform an insert if no documents match the filter.`
 
-`:return`:
+`:return: bool True if modified count is 1.`
 
 ###AnimalShelter.delete():
 The delete method will take a single document and delete it from the database. This uses the mongoDB delete_one() to delete a single document at a time.
@@ -132,8 +133,12 @@ for doc in dbo.read({"animal_id": "SammyTest"}):
     print("document read success")
 ```
  
-###Update a Document - WIP
+###Update a Document
 ```python
+dbo.update({"animal_id": "SammyTest"}, {"$set": {"animal_id": "NewSammyTest"}})
+for doc in dbo.read({"animal_id": "NewSammyTest"}):
+    print(doc)
+    print("document update success")
 ```
 ###Delete a Document
 ```python
@@ -143,12 +148,6 @@ if dbo.delete({"animal_id": "SammyTest"}):
 else:
     print("delete record failed")
 ```
- 
-
-##Roadmap/Features (Optional)
-Provide an open issues list of proposed features (and known issues). If you have ideas for releases in the future, it is a good idea to list them in the README. What makes your project stand out?
-
-Note: This section is optional for the purposes of this assignment. If you choose not to fill out this section, remove it from your final README file.
 
 ##Contact
 Sammy Shuck
