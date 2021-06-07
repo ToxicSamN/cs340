@@ -45,12 +45,12 @@ class AnimalShelter(object):
 
         return False
 
-    def read(self, query_filter=None) -> dict:
+    def read(self, query_filter=None):
         """
-            The read method will fond a docuement in the database and return it to the user
+            The read method will find a document in the database and return it to the user
             :param query_filter: (Optional) dict object to filter the find command. If left blank then all documents are
-            retieved.
-            :return: list of dict objects are returned
+            retrieved.
+            :return: cursor of records
         """
         # check if parameter is None and set it to a default
         if query_filter is None:
