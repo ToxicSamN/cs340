@@ -45,18 +45,19 @@ class AnimalShelter(object):
 
         return False
 
-    def read(self, query_filter=None):
+    def read(self, query_filter=None, **kwargs) -> dict:
         """
             The read method will find a document in the database and return it to the user
             :param query_filter: (Optional) dict object to filter the find command. If left blank then all documents are
             retrieved.
-            :return: cursor of records
+            Use a dict to exclude fields from the result (e.g. projection={'_id': False}).
+            :return: list of dict objects are returned
         """
         # check if parameter is None and set it to a default
         if query_filter is None:
             query_filter = {}
 
-        return self.collection.find(query_filter)
+        return self.collection.find(filter=query_filter, **kwargs)
 
     def update(self, update_filter=None, update=None, upsert=False) -> bool:
         """
