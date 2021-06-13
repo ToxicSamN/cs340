@@ -114,3 +114,28 @@ credstore_notes.txt
 testing.py
 
 .DS_Store
+*.gz
+
+dash_leaflet-0.0.9/dash_leaflet.egg-info/
+
+dash_leaflet-0.0.9/dash_leaflet/
+
+dash_leaflet-0.1.12/dash_leaflet/
+
+dash_leaflet-0.0.9/
+
+dash_leaflet-0.1.12/dash_leaflet.egg-info/
+
+dash_leaflet-0.1.12/
+
+dl/
+
+express.py
+
+ModuleSixMilestone (1).ipynb
+
+ModuleSixMilestone_Sanford.ipynb
+
+student_help/
+
+test.py

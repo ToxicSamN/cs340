@@ -50,7 +50,8 @@ class AnimalShelter(object):
             The read method will find a document in the database and return it to the user
             :param query_filter: (Optional) dict object to filter the find command. If left blank then all documents are
             retrieved.
-            Use a dict to exclude fields from the result (e.g. projection={'_id': False}).
+            :param kwargs: see a list of arguments that can be passed to the find() function
+            https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html#pymongo.collection.Collection.find
             :return: list of dict objects are returned
         """
         # check if parameter is None and set it to a default
